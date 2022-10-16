@@ -52,19 +52,21 @@ exports.updateProduct=async(req,res,next) => {
 
 //Eliminar un producto
 exports.deleteProduct=async(req,res,next) => {
-    const product= await producto.findById(req.params.id) //Variable de tipo modificable
+    const product = await producto.findById(req.params.id);//Variable de tipo modificable
     if (!product){ //Verifico que el objeto no existe para finalizar el proceso
-        return res.status(404).json({ //Si el objeto no existe, return termina el metodo
+        return res.status(404).json({
             success:false,
-            message: 'No encontramos ese producto'
+            message: "No encontramos ese producto"
         })
     }
-    await product.remove();//Eliminamos el proceso
+
+    await product.remove();
     res.status(200).json({
-        success: true,
-        message:"Producto eliminado correctamente",
-    })
+        success:true, 
+        message: "Producto eliminado correctamente"
+    });
 }
+
 //Crear nuevo producto /api/productos
 exports.newProduct =async(req,res,next) => {
     const product= await producto.create(req.body);
