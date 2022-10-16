@@ -59,7 +59,6 @@ exports.deleteProduct=async(req,res,next) => {
             message: "No encontramos ese producto"
         })
     }
-
     await product.remove();
     res.status(200).json({
         success:true, 
