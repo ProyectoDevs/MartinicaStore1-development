@@ -1,12 +1,24 @@
 import './App.css';
+import Header from './components/Header';
+import Footer from './components/layout/Footer';
 
 function App() {
   return (
     <div className="App">
-      <h1> Tienda Virtual de Ropa </h1>
-      <img src="./images/LogoMS.png" alt="Aquí va el logo"></img>
+      <Header />
+      <center>Contenido aquí</center>
+      <center>Contenido aquí</center>
+      <center>Contenido aquí</center>
+      <center>Contenido aquí</center>
+      <center>Contenido aquí</center>
+      <center>Contenido aquí</center>
+      <center>Contenido aquí</center>
+      <center>Contenido aquí</center>
+      <center>Contenido aquí</center>
+      <Footer/>
     </div>
   );
 }
 
 export default App;
+
