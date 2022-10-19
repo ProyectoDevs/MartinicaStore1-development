@@ -1,16 +1,25 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
+import MetaData from './layout/MetaData'
+import { useDispatch } from 'react-redux'
+import { getProducts } from '../actions/productActions'
 
-const Home = () => {
-  return (
-    <Fragment>
-        <h2 id="encabezado_productos">  Ofertas </h2>
-        <section id="productos" className='container mt-5'>
-            <div className='row'>
+export const Home = () => {    
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getProducts());
+    }, [dispatch])
+
+    return (
+        <Fragment>
+            <MetaData title="La mejor tienda virtual de ropa"></MetaData>
+            <h2 id="encabezado_productos">  Ofertas </h2>
+            <section id="productos" className='container mt-5'>
+                <div className='row'>
                 {/* Producto1*/}
                 <div className='col-sm-12 col-md-6 col-lg-3 my-3'>
                     <div className='card p-3 rounded'>
                         <img className='card-img-top mx-auto' src='./images/chaqueta_cuero.webp' alt='Chaqueta de cuero' />
-                        <div className='card-body d-flez flex-column'>
+                        <div className='card-body d-flex flex-column'>
                             <h5 id="titulo_producto"><a href='http://localhost:3000'> Hermosa chaqueta de cuero para caballero</a></h5>
                             <div className='rating mt-auto'>
                                 <div className='rating-outer'>
