@@ -36,7 +36,7 @@ export const Home = () => {
                 {/* Producto2*/}
                 <div className='col-sm-12 col-md-6 col-lg-3 my-3'>
                     <div className='card p-3 rounded'>
-                        <img className='card-img-top mx-auto' src='./images/conjunto_moda_niños.jpg' alt='Conjunto de moda para nños' />
+                        <img className='card-img-top mx-auto' src='./images/conjunto_moda_ninos.jpg' alt='Conjunto de moda para nños' />
                         <div className='card-body d-flez flex-column'>
                             <h5 id="titulo_producto"><a href='http://localhost:3000'> Lindo conjunto para niños</a></h5>
                             <div className='rating mt-auto'>
@@ -54,7 +54,7 @@ export const Home = () => {
                 {/* Producto3*/}
                 <div className='col-sm-12 col-md-6 col-lg-3 my-3'>
                     <div className='card p-3 rounded'>
-                        <img className='card-img-top mx-auto' src='./images/vestido_niñas.jpg' alt='Vestido para niñas' />
+                        <img className='card-img-top mx-auto' src='./images/vestido_ninas.jpg' alt='Vestido para niñas' />
                         <div className='card-body d-flez flex-column'>
                             <h5 id="titulo_producto"><a href='http://localhost:3000'> Hermoso vestido para niñas</a></h5>
                             <div className='rating mt-auto'>
