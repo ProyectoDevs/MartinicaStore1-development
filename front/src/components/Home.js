@@ -1,95 +1,56 @@
 import React, { Fragment, useEffect } from 'react'
 import MetaData from './layout/MetaData'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getProducts } from '../actions/productActions'
+import { Link } from 'react-router-dom'
+import { useAlert } from 'react-alert'
 
-export const Home = () => {    
+export const Home = () => {   
+    const {loading, productos, error } = useSelector(state=> state.products)
+    const alert= useAlert();
+
     const dispatch = useDispatch();
     useEffect(() => {
+        if (error){
+            return alert.error(error);
+        }
         dispatch(getProducts());
+        alert.success("OK")
     }, [dispatch])
 
     return (
-        <Fragment>
-            <MetaData title="La mejor tienda virtual de ropa"></MetaData>
-            <h2 id="encabezado_productos">  Ofertas </h2>
-            <section id="productos" className='container mt-5'>
-                <div className='row'>
-                {/* Producto1*/}
-                <div className='col-sm-12 col-md-6 col-lg-3 my-3'>
-                    <div className='card p-3 rounded'>
-                        <img className='card-img-top mx-auto' src='./images/chaqueta_cuero.webp' alt='Chaqueta de cuero' />
-                        <div className='card-body d-flex flex-column'>
-                            <h5 id="titulo_producto"><a href='http://localhost:3000'> Hermosa chaqueta de cuero para caballero</a></h5>
-                            <div className='rating mt-auto'>
-                                <div className='rating-outer'>
-                                    <div className='rating-inner'></div>
+       <Fragment>
+            {loading ? <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i> :(
+                <Fragment>
+                    <MetaData title="La mejor tienda virtual de ropa"></MetaData>
+                     <h2 id="encabezado_productos">  Ofertas </h2>
+                     <section id="productos" className='container mt-5'>
+                       <div className='row'>
+                         {productos && productos.map(producto => (
+                         <div key={producto._id} className='col-sm-12 col-md-6 col-lg-3 my-3'>
+                         <div className='card p-3 rounded'>
+                            <img className='card-img-top mx-auto' src={producto.imagen[0].url} alt={producto.imagen[0].public_id}></img>
+                            <div className='card-body d-flex flex-column'>
+                                <h5 id="titulo_producto"><Link to={`/producto/${producto._id}`}> {producto.nombre}</Link></h5>
+                                <div className='rating mt-auto'>
+                                    <div className='rating-outer'>
+                                        <div className='rating-inner' style={{width:`${(producto.calificacion/5)*100}%`}}></div>
+                                    </div>
+                                    <span id="No_de_opniniones"> {producto.numCalificaciones} Reviews </span>
                                 </div>
-                                <span id="No_de_opniniones"> 4 reviews </span>
+                                <p className="card-text">${producto.precio}</p>
+                                <Link to={`/producto/${producto._id}`} id="view_btn" className="btn btn-block">
+                                    Ver detalle
+                                </Link>
                             </div>
-                            <p className='card-text'>$340.000</p><a href='http://localhost:3000' id="view_btn" className='btn btn-block'>
-                                Ver detalle</a>
-                        </div>   
+                        </div>
                     </div>
-                </div>
-
-                {/* Producto2*/}
-                <div className='col-sm-12 col-md-6 col-lg-3 my-3'>
-                    <div className='card p-3 rounded'>
-                        <img className='card-img-top mx-auto' src='./images/conjunto_moda_ninos.jpg' alt='Conjunto de moda para nños' />
-                        <div className='card-body d-flez flex-column'>
-                            <h5 id="titulo_producto"><a href='http://localhost:3000'> Lindo conjunto para niños</a></h5>
-                            <div className='rating mt-auto'>
-                                <div className='rating-outer'>
-                                    <div className='rating-inner'></div>
-                                </div>
-                                <span id="No_de_opniniones"> 13 reviews </span>
-                            </div>
-                            <p className='card-text'>$105.000</p><a href='http://localhost:3000' id="view_btn" className='btn btn-block'>
-                                Ver detalle</a>
-                        </div>   
-                    </div>
-                </div>
-
-                {/* Producto3*/}
-                <div className='col-sm-12 col-md-6 col-lg-3 my-3'>
-                    <div className='card p-3 rounded'>
-                        <img className='card-img-top mx-auto' src='./images/vestido_ninas.jpg' alt='Vestido para niñas' />
-                        <div className='card-body d-flez flex-column'>
-                            <h5 id="titulo_producto"><a href='http://localhost:3000'> Hermoso vestido para niñas</a></h5>
-                            <div className='rating mt-auto'>
-                                <div className='rating-outer'>
-                                    <div className='rating-inner'></div>
-                                </div>
-                                <span id="No_de_opniniones"> 5 reviews </span>
-                            </div>
-                            <p className='card-text'>$78.000</p><a href='http://localhost:3000' id="view_btn" className='btn btn-block'>
-                                Ver detalle</a>
-                        </div>   
-                    </div>
-                </div>
-
-                {/* Producto4*/}
-                <div className='col-sm-12 col-md-6 col-lg-3 my-3'>
-                    <div className='card p-3 rounded'>
-                        <img className='card-img-top mx-auto' src='./images/overall.jpg' alt='Overall para damas' />
-                        <div className='card-body d-flez flex-column'>
-                            <h5 id="titulo_producto"><a href='http://localhost:3000'> Overall para damas</a></h5>
-                            <div className='rating mt-auto'>
-                                <div className='rating-outer'>
-                                    <div className='rating-inner'></div>
-                                </div>
-                                <span id="No_de_opniniones"> 7 reviews </span>
-                            </div>
-                            <p className='card-text'>$98.000</p><a href='http://localhost:3000' id="view_btn" className='btn btn-block'>
-                                Ver detalle</a>
-                        </div>   
-                    </div>
-                </div>
-            </div>
-        </section>
-    </Fragment>
-  )
+                    ))}
+                  </div>
+                </section>
+            </Fragment>
+            )} 
+        </Fragment>
+    )
 }
-
 export default Home
