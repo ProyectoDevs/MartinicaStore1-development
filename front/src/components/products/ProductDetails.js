@@ -12,7 +12,7 @@ export const ProductDetails = () => {
 
                 <div className='col-12 col-lg-5 mt-5'>
                     <h3> Sudadera multicolor para niñas</h3>
-                    <p id="product-id">Product #324513</p>
+                    <p id="product-id">Product #326713</p>
                 </div>
             </div>
         </Fragment>

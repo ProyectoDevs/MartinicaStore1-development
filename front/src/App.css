@@ -27,12 +27,12 @@ body {
 }
 
 nav {
-  background-color: #232f3e;
+  background-color: #609f81;
   padding: 1rem 1rem;
 }
 
 #search_btn {
-  background-color: #febd69;
+  background-color: #a0835f;
 }
 
 .input-group {
@@ -116,7 +116,7 @@ nav {
 /* Footer */
 footer {
   margin-top: 8rem;
-  color: grey;
+  color: rgb(149, 121, 121);
   bottom: 0;
   width: 100%;
 }
