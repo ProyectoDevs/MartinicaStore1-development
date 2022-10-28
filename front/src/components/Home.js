@@ -15,7 +15,7 @@ export const Home = () => {
             return alert.error(error);
         }
         dispatch(getProducts());
-        alert.success("OK")
+        
     }, [dispatch])
 
     return (
