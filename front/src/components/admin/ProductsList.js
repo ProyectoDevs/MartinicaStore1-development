@@ -68,9 +68,12 @@ export const ProductsList = () => {
                     <Link to="/" className="btn btn-danger py-1 px-2">
                         <i className="fa fa-trash"></i>
                     </Link>
+                    
+
                 </Fragment>
             })
         })
+
         return data;
     }
 
@@ -81,6 +84,7 @@ export const ProductsList = () => {
                 <div className="col-12 col-md-2">
                     <Sidebar />
                 </div>
+
                 <div className="col-12 col-md-10">
                     <Fragment>
                         <h1 className="my-5">Productos Registrados</h1>

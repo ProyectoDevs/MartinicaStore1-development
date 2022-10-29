@@ -1,0 +1,36 @@
+{
+    "item": [
+    {     
+            "_id": "635289fdcbeec08d171283b1",
+            "nombre": "Calzado para dama",
+            "precio": 72000,
+            "imagen": "./images/productos/calzado_dama.jpg",
+            "inventario": 24,
+            "__v": 0    
+        },
+        {
+            "_id": "63528a6bcbeec08d171283b4",
+            "nombre": "Falda con botones",
+            "precio": 58000,
+            "imagen": "./images/productos/falda_con_botones.jpg",
+            "inventario": 32,
+            "__v": 0
+        },
+        {
+            "_id": "63528ac7cbeec08d171283b7",
+            "nombre": "Chaqueta de cuero para caballeros",
+            "precio": 345000,
+            "imagen": "./images/chaqueta_cuero.webp",
+            "inventario": 12,
+            "__v": 0
+        },
+        {
+            "_id": "63528b57cbeec08d171283bd",
+            "nombre": "Sudadera para niñas",
+            "precio": 68000,
+            "imagen":  "./images/sudadera_ninas.jpg",
+            "inventario": 36,
+            "__v": 0
+        }
+    ]
+}
