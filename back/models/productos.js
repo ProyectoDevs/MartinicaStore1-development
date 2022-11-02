@@ -76,6 +76,12 @@ const productosSchema = mongoose.Schema({
             }
         }
     ],
+    user:{
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        required:true
+    },
+
     fechaCreation:{
         type:Date,
         default:Date.now
