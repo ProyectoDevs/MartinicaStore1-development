@@ -5,6 +5,7 @@ const tokenEnviado = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const { response } = require("express");
+const { json } = require("body-parser");
 
 //Registrar un nuevo usuario /api/usuario/registro
 exports.registroUsuario= catchAsyncErrors(async (req, res, next) =>{
@@ -154,14 +155,14 @@ exports.updatePassword= catchAsyncErrors(async (req, res, next) =>{
 //Update perfil de usuario
 exports.updateProfile = catchAsyncErrors(async(req, res, next)=>{
 
-    const nuevaData = {
+    const newUserData = {
         nombre: req.body.nombre,
         email: req.body.email
     }
 
     //update Avatar
 
-    const user = await User.findByIdAndUpdate(req.user.id, nuevaData, {
+    const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
         new:true,
         runValidators:true,
         useFindAndModify:false
@@ -219,3 +220,31 @@ exports.updateUser= catchAsyncErrors(async(req, res, next)=>{
         user
     })
 })
+
+//eliminar usuario como administrador
+exports.deleteUser= catchAsyncErrors(async(req, res, next)=>{
+    const user = await User.findById(req.params.id);
+
+    if(!user){
+        return next (new ErrorHandler(`Usuario con id: ${req.params.id} no se encuentra en nuestra base de datos`));
+    }
+
+    await user.remove();
+
+    response.status(200).json({
+        success:true,
+        message:"Usuario eliminado correctamente"
+    })
+})
+
+exports.inactiveuser = catchAsyncErrors(async(req, res, next)=>{
+    const user = await User.findById(req.params.id);
+    if(!user){
+        message:"Se ha inactivado su usuario"
+    }
+   user.estado="inactivo"
+   res.status(200).json({
+        success: true,
+        message:"Se inactivó el usuario correctamente"
+   })
+});
