@@ -1,12 +1,31 @@
 const express=require("express");
-const { registroUsuario, loginUser, logOut, forgotPassword, resetPassword } = require("../controllers/authController");
-const { isAuthenticatedUser } = require("../middleware/auth");
-const router= express.Router();
+const { registroUsuario, 
+    loginUser, 
+    logOut, 
+    forgotPassword, 
+    resetPassword,
+    getUserProfile,
+    updatePassword,
+    updateProfile,
+    getAllUsers,
+    getUserDetails,
+    updateUser,
+} = require("../controllers/authController");
+const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
+const router= require ("express").Router();
 
 router.route('/usuario/registro').post(registroUsuario)
 router.route('/login').get(loginUser)
 router.route('/logout').get(isAuthenticatedUser, logOut)
-router.route("/forgotPassword").post(forgotPassword)
+router.route('/forgotPassword').post(forgotPassword)
 router.route('/resetPassword/:token').post(resetPassword)
+router.route('/me').get(getUserProfile)
+router.route('/me/updatePassword').put(isAuthenticatedUser, updatePassword)
+router.route('/me/updateProfile').put(isAuthenticatedUser, updateProfile)
+
+//admin routes
+router.route('/admin/allUsers').get(isAuthenticatedUser, authorizeRoles("admin"),  getAllUsers)
+router.route('/admin/user/:id').get(isAuthenticatedUser, authorizeRoles("admin"), getUserDetails)
+router.route('/admin/updateUser/:id').put(isAuthenticatedUser, authorizeRoles("admin"), updateUser)
 
 module.exports= router
