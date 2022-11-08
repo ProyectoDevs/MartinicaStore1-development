@@ -2,32 +2,28 @@ import React, { Fragment, useEffect, useState } from 'react'
 import MetaData from './layout/MetaData'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts } from '../actions/productActions'
-import { useParams, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import Pagination from 'react-js-pagination'
 
-
-
 export const Home = () => {
-    const params= useParams();
-    const keyword= params.keyword;
     const [currentPage, setCurrentPage] = useState(1)
     const { loading, products, error, resPerPage, productsCount } = useSelector(state => state.products)
     const alert = useAlert();
-    
+
     const dispatch = useDispatch();
     useEffect(() => {
         if (error) {
             return alert.error(error)
         }
 
-        dispatch(getProducts(currentPage, keyword));
-    }, [dispatch, alert, error, currentPage, keyword])
+        dispatch(getProducts(currentPage));
+    }, [dispatch, alert, error, currentPage])
 
     function setCurrentPageNo(pageNumber){
         setCurrentPage(pageNumber)
     }
-    
+
     return (
         <Fragment>
             {loading ? <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i> : (
