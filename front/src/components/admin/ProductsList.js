@@ -17,9 +17,10 @@ export const ProductsList = () => {
         if (error){
             return alert.error(error)
         }
-
         dispatch(getProducts());
-    }, [dispatch])
+
+    }, [dispatch, alert, error]);
+
 
     const setProducts = () => {
         const data = {

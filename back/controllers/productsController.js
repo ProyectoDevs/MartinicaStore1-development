@@ -7,7 +7,7 @@ const fetch =(url)=>import('node-fetch').then(({default:fetch})=>fetch(url));
 //Ver la lista de productos
 exports.getProducts= catchAsyncErrors(async(req,res,next) => {
 
-    const resPerPage=3;
+    const resPerPage=4;
     const productsCount = await producto.countDocuments();
 
     const apiFeatures = new APIFeatures(producto.find(), req.query)
@@ -27,6 +27,7 @@ exports.getProducts= catchAsyncErrors(async(req,res,next) => {
         products
     })
 
+    
     const productos = await producto.find();
     if (!productos){
         return next(new ErrorHandler("Información no encontrada", 404))
