@@ -10,13 +10,7 @@ import Dashboard from './components/admin/Dashboard';
 import ProductsList from './components/admin/ProductsList';
 import NewProduct from './components/admin/newProduct';
 import Cart from './components/cart/Cart';
-<<<<<<< HEAD
-import * as React from 'react';
-import Header from './components/Header'
-import Footer from './components/layout/Footer'
 
-=======
->>>>>>> c7357a1810ee15443d5e4568bcc4b2230f88af85
 
 
 function App() {

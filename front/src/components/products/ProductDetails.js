@@ -5,6 +5,8 @@ import { useParams} from 'react-router-dom'
 import { clearErrors, getProductDetails } from '../../actions/productActions';
 import { useAlert } from 'react-alert'
 import { Carousel } from 'react-bootstrap'
+import uniqid from 'uniqid'
+import axios from 'axios'
 
 export const ProductDetails = () => {
     const {loading, product, error} = useSelector(state =>state.productDetails)
@@ -33,6 +35,24 @@ export const ProductDetails = () => {
           if (contador.valueAsNumber <= 1) return;
           const qty = contador.valueAsNumber-1;
           setQuantity(qty)
+       }
+
+
+       function agregarItem() {
+        var item = {
+          producto: `${product._id}`,
+          valor_total: `${product.precio * quantity}`,
+          cantidad:quantity,
+          cliente: "Luis Gabriel quira",
+          idItem: uniqid()
+        }
+        console.log(item)
+
+        axios.post('/api/itemcart',item)
+        .then(res =>{
+          alert("Producto agregado")
+        })
+        .then(err =>{console.log(err)})
        }
     
       return (
@@ -63,10 +83,10 @@ export const ProductDetails = () => {
             <p id="precio_producto">${product.precio}</p>
           <div className="stockCounter d-inline">
             <span className="btn btn-danger minus" onClick={decreaseQty}>-</span>
-            <input type="number" className="form-control count d-inline" value={quantity} readOnly/>
+            <input type="number" className="form-control count d-inline" value={quantity} onChange={(e)=> {setQuantity(e.target.value)}} readOnly/>
             <span className="btn btn-primary plus" onClick={increaseQty}>+</span>
           </div>
-            <button type="button" id="carrito_btn" className="btn btn-primary d-inline ml-4" disabled={product.inventario===0}>Agregar al Carrito</button>
+            <button onClick={agregarItem} type="button" id="carrito_btn" className="btn btn-primary d-inline ml-4" disabled={product.inventario===0}>Agregar al Carrito</button>
             <hr />
             <p>Estado: <span id="stock_stado" className={product.inventario>0 ? 'greenColor':'redColor'}>{product.inventario>0 ? "En existencia": "Agotado"}</span></p>
             <hr />

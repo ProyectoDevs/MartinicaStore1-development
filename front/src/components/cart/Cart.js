@@ -1,7 +1,7 @@
-import React, { Fragment, useState} from 'react'
+import React, { Fragment, useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
 import MetaData from '../layout/MetaData'
-
+import axios from 'axios'
 
 const Cart = () => {
     const [quantity, setQuantity] = useState(1)
@@ -20,69 +20,51 @@ const Cart = () => {
    }
 
     //Json de ejemplo
-   let cartItems=[
-        {
-            "_id": "635289fdcbeec08d171283b1",
-            "nombre": "Calzado para dama",
-            "precio": 72000,
-            "imagen": "./images/productos/calzado_dama.jpg",
-            "inventario": 24,
-        },
-        {
-            "_id": "63528a6bcbeec08d171283b4",
-            "nombre": "Falda con botones",
-            "precio": 58000,
-            "imagen": "./images/productos/falda_con_botones.jpg",
-            "inventario": 32,
-        },
-        {
-            "_id": "63528ac7cbeec08d171283b7",
-            "nombre": "Chaqueta de cuero para caballeros",
-            "precio": 345000,
-            "imagen": "./images/chaqueta_cuero.webp",
-            "inventario": 12,
-        },
-        {
-            "_id": "63528b57cbeec08d171283bd",
-            "nombre": "Sudadera para niñas",
-            "precio": 68000,
-            "imagen":  "./images/sudadera_ninas.jpg",
-            "inventario": 36,
-        }
-    ]
+   
 
-cartItems = Array.from(cartItems);
+//cartItems = Array.from(cartItems);
+
+const [itemsCart, setItemsCart] = useState([])
+useEffect(() =>{
+    axios.get('/api/mycart').then(res=>{
+        console.log(res.data)
+    }).catch(err => {
+        console.log(err)
+    })
+},[])
+
+
 
     return (
         <Fragment>
             <MetaData title={'Your Cart'} />
             
 
-            {cartItems.length === 0 ? <h2 className="mt-5">Su carrito esta vacio</h2> : (
+            {itemsCart.length === 0 ? <h2 className="mt-5">Su carrito esta vacio</h2> : (
                 <Fragment>
                     
-                    <h2 className="mt-5">Su Carrito: <b>{cartItems.length} items</b></h2>
+                    <h2 className="mt-5">Su Carrito: <b>{itemsCart.length} items</b></h2>
 
                     <div className="row d-flex justify-content-between">
                         <div className="col-12 col-lg-8">
 
-                        {cartItems && cartItems.map (item => (
+                        {itemsCart && itemsCart.map (item => (
                                 <Fragment>
                                     <hr />
 
-                                    <div className="cart-item" key={item.nombre}>
+                                    <div className="cart-item" key={item.producto[0].nombre}>
                                         <div className="row">
                                             <div className="col-4 col-lg-3">
-                                                <img src={item.imagen} alt={item.nombre} height="90" width="115" />
+                                                <img src={item.producto.imagen} alt={item.producto.nombre} height="90" width="115" />
                                             </div>
 
                                             <div className="col-5 col-lg-3">
-                                                <Link to={`/producto/${item._id}`}>{item.nombre}</Link>
+                                                <Link to={`/producto/${item._id}`}>{item.producto.nombre}</Link>
                                             </div>
 
 
                                             <div className="col-4 col-lg-2 mt-4 mt-lg-0">
-                                                <p id="card_item_price">${item.precio}</p>
+                                                <p id="card_item_price">${item.producto.precio}</p>
                                             </div>
 
                                             <div className="col-4 col-lg-3 mt-4 mt-lg-0">
