@@ -1,9 +1,21 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import "../../App.css"
 import { Link } from "react-router-dom"
 import { Search } from './Search'
+import axios from 'axios'
 
 const Header = () => {
+
+
+    const [cantidad, setCantidad] = useState([]);
+
+    useEffect(() => {
+        axios.get('/api/countitems')
+            .then((response) => {
+                console.log(response.data);
+                setCantidad(response.data)
+            })
+    })
 
     return (
         <Fragment>
@@ -15,8 +27,8 @@ const Header = () => {
                 </div>
 
                 <div className='col-12 col-md-6 mt-2 mt-md-0'>
-                 {/*Aqui va buscar*/}
-                 <Search />
+                    {/*Aqui va buscar*/}
+                    <Search />
                 </div>
                 <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
                     <div className="ml-4 dropdown d-inline">
@@ -31,7 +43,10 @@ const Header = () => {
                         </div>
                     </div>
                     <Link to="/carrito"><i class="fa fa-shopping-cart fa-2x text-white" aria-hidden="false"></i>
-                        <span className="ml-1" id="cart_count">2</span></Link>
+                        {cantidad.map((c) => (
+                            <span className="ml-1" id="cart_count">{citemsCount}</span>
+                        ))}
+                    </Link>
                 </div>
             </nav>
         </Fragment>
