@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
-import Header from './components/Header';
-import Footer from './components/layout/Footer';
+import Header from './components/layout/Header';
+import  Footer  from './components/layout/Footer';
 import Home from './components/Home';
 import { ProductDetails } from './components/products/ProductDetails';
 //Router traido desde react-router-dom (no confundir con el de express)
@@ -10,7 +10,7 @@ import Dashboard from './components/admin/Dashboard';
 import ProductsList from './components/admin/ProductsList';
 import NewProduct from './components/admin/newProduct';
 import Cart from './components/cart/Cart';
-import Login from './components/user/Login';
+
 
 
 function App() {
@@ -28,10 +28,9 @@ function App() {
             <Route path="/nuevoProducto" element={<NewProduct />}/>
             <Route path="/search/:keyword" element={<Home />}/>
             <Route path="/carrito" element={<Cart />}/>
-            <Route path="/login" element={<Login />}/>
           </Routes>
         </div>
-        <Footer />
+      <Footer />
     </div>
     </Router>
   );
