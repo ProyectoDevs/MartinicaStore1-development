@@ -1,8 +1,8 @@
 class APIFeatures{
     constructor(query, queryStr){
-    this.query=query;
-    this.queryStr=queryStr
-}
+        this.query=query;
+        this.queryStr=queryStr;
+    }
 
 search(){
     const keyword= this.queryStr.keyword ? {
@@ -12,19 +12,19 @@ search(){
         }
     }:{}
 
-    this.query= this.query.find({...keyword});
+    this.query = this.query.find({...keyword});
     return this
 }
 
 filter(){
-    const queryCopy = { ...this.queryStr};
+    const queryCopy = {...this.queryStr};
 
-    //eliminemos los campos que vienen de otras consultas
-    const removeFields= ["keyword", "limit", "page"]
-    removeFields.forEach(el => delete queryCopy[el])
+    //Eliminar los campos que vienen de otras consultas
+    const removeFields=["keyword", "limit", "page"]
+    removeFields.forEach(elem=> delete queryCopy[elem])
 
-    //Filtro avanzado para precio
-    let queryStr= JSON.stringify(queryCopy)
+    //Filtro para precio
+    let queryStr = JSON.stringify(queryCopy)
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, match =>
     `$${match}`)
 
@@ -34,12 +34,11 @@ filter(){
 
 pagination(resPerPage){
     const currentPage = Number(this.queryStr.page) || 1;
-    const skip = resPerPage * (currentPage-1);
+    const skip = resPerPage * (currentPage -1);
 
-    this.query= this.query.limit(resPerPage).skip(skip)
+    this.query = this.query.limit(resPerPage).skip(skip)
     return this
 }
-
 }
 
 module.exports = APIFeatures
