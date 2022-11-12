@@ -9,7 +9,11 @@ import { getProducts } from '../../actions/productActions'
 import {Link } from "react-router-dom"
 
 export const ProductsList = () => {
+<<<<<<< HEAD
     const { loading, products, error} = useSelector(state=> state.products)
+=======
+    const { loading, productos, error} = useSelector(state=> state.products)
+>>>>>>> jules
     const alert= useAlert();
 
     const dispatch = useDispatch();
@@ -17,9 +21,16 @@ export const ProductsList = () => {
         if (error){
             return alert.error(error)
         }
+<<<<<<< HEAD
 
         dispatch(getProducts());
     }, [alert, dispatch, error])
+=======
+        dispatch(getProducts());
+
+    }, [dispatch, alert, error]);
+
+>>>>>>> jules
 
     const setProducts = () => {
         const data = {
@@ -52,7 +63,11 @@ export const ProductsList = () => {
             rows: []
         }
 
+<<<<<<< HEAD
         products.forEach(product => {
+=======
+        productos.forEach(product => {
+>>>>>>> jules
             data.rows.push({
                 nombre: product.nombre,
                 precio: `$${product.precio}`,

@@ -1,4 +1,5 @@
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+<<<<<<< HEAD
 const producto = require("../models/productos");
 const APIFeatures = require("../utils/apiFeatures");
 const ErrorHandler = require("../utils/errorHandler");
@@ -8,16 +9,34 @@ const fetch = (url) => import('node-fetch').then(({ default: fetch }) => fetch(u
 exports.getProducts = catchAsyncErrors(async (req, res, next) => {
 
     const resPerPage = 4;
+=======
+const producto=require("../models/productos");
+const APIFeatures = require("../utils/apiFeatures");
+const ErrorHandler = require("../utils/errorHandler");
+const fetch =(url)=>import('node-fetch').then(({default:fetch})=>fetch(url));
+
+//Ver la lista de productos
+exports.getProducts= catchAsyncErrors(async(req,res,next) => {
+
+    const resPerPage=4;
+>>>>>>> jules
     const productsCount = await producto.countDocuments();
 
     const apiFeatures = new APIFeatures(producto.find(), req.query)
         .search()
         .filter();
 
+<<<<<<< HEAD
     let products = await apiFeatures.query;
     let filteredProductsCount= products.length;
     apiFeatures.pagination(resPerPage);
     products = await apiFeatures.query.clone();
+=======
+    let products= await apiFeatures.query;
+    let filteredProductsCount= products.length;
+    apiFeatures.pagination(resPerPage)
+    products= await apiFeatures.query.clone()
+>>>>>>> jules
 
     res.status(200).json({
         success: true,
@@ -27,6 +46,7 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
         products
     })
 
+<<<<<<< HEAD
 })
 
 //Ver un producto por ID
@@ -40,11 +60,35 @@ exports.getProductById = catchAsyncErrors(async (req, res, next) => {
     res.status(200).json({
         success: true,
         message: "Aqui debajo encuentras información sobre tu producto: ",
+=======
+    
+    const productos = await producto.find();
+    if (!productos){
+        return next(new ErrorHandler("Información no encontrada", 404))
+        }
+    res.status(200).json({
+        success:true,
+        count: productos.length,
+        productos
+    })
+})
+
+//Ver un producto por ID
+exports.getProductById= catchAsyncErrors(async(req,res,next) => {
+    const product =  await producto.findById(req.params.id);
+    if (!product){
+        return next(new ErrorHandler("Producto no encontrado", 404))
+        }
+    res.status(200).json({
+        success:true,
+        message: "Aquí debajo encuentras información sobre tu producto",
+>>>>>>> jules
         product
     })
 })
 
 //Update un producto
+<<<<<<< HEAD
 exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     let product = await producto.findById(req.params.id) //Variable de tipo modificable
     if (!product) {
@@ -59,11 +103,27 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     //Respondo Ok si el producto si se actualizó
     res.status(200).json({
         success: true,
+=======
+exports.updateProduct= catchAsyncErrors(async(req,res,next) => {
+    let product = await producto.findById(req.params.id);//Variable de tipo modificable
+    if (!product){
+        return next(new ErrorHandler("Producto no encontrado", 404))
+    }
+    //Si el objeto si existía, emtonces si ejecuto la actualización
+    product=await producto.findByIdAndUpdate(req.params.id,req.body, {
+        new:true, //Valido solo los atributos nuevos o actualizados
+        runValidators: true
+    });
+    //Respondió Ok si el producto si se actualizó
+    res.status(200).json({
+        success:true,
+>>>>>>> jules
         message: "Producto actualizado correctamente",
         product
     })
 })
 
+<<<<<<< HEAD
 
 //Eliminar un producto
 exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
@@ -86,6 +146,27 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
     const product = await producto.create(req.body);
     res.status(201).json({
         success: true,
+=======
+//Eliminar un producto
+exports.deleteProduct= catchAsyncErrors(async(req,res,next) => {
+    const product = await producto.findById(req.params.id);//Variable de tipo modificable
+    if (!product){
+        return next(new ErrorHandler("Producto no encontrado", 404))
+    }
+    await product.remove();//Eliminamos el producto 
+    res.status(200).json({
+        success:true, 
+        message: "Producto eliminado correctamente"
+    });
+})
+
+//Crear nuevo producto /api/productos
+exports.newProduct = catchAsyncErrors(async(req,res,next) => {
+    req.body.user=req.user.id;
+    const product= await producto.create(req.body);
+    res.status(201).json({
+        success:true,
+>>>>>>> jules
         product
     })
 })
@@ -144,6 +225,7 @@ exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
 exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
     const product = await producto.findById(req.query.idProducto);
 
+<<<<<<< HEAD
     const opiniones = product.opiniones.filter(opinion =>
         opinion._id.toString() !== req.query.idReview.toString());
 
@@ -154,6 +236,18 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
 
     await producto.findByIdAndUpdate(req.query.idProducto, {
         opiniones,
+=======
+    const opi = product.opiniones.filter(opinion =>
+        opinion._id.toString() !== req.query.idReview.toString());
+
+    const numCalificaciones = opi.length;
+
+    const calificacion = opi.reduce((acc, Opinion) =>
+        Opinion.rating + acc, 0) / opi.length;
+
+    await producto.findByIdAndUpdate(req.query.idProducto, {
+        opi,
+>>>>>>> jules
         calificacion,
         numCalificaciones
     }, {
@@ -170,6 +264,7 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
 
 //HABLEMOS DE FETCH
 //Ver todos los productos
+<<<<<<< HEAD
 function verProductos() {
     fetch('http://localhost:4000/api/productos')
         .then(res => res.json())
@@ -188,3 +283,23 @@ function verProductoPorID(id) {
 }
 
 //verProductoPorID('63456a8d9163cb9dbbcaa235'); Probamos el metodo con un id
+=======
+function verProductos(){
+    fetch('http://localhost:4000/api/productos')
+    .then(res=>res.json())
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err))
+}
+
+//verProductos();Llamos al método creado para probar la consulta
+
+//Ver por ID
+function verProductoPorID(id) {
+    fetch('http://localhost:4000/api/producto/'+id)
+    .then(res=>res.json())
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err))
+}
+
+
+>>>>>>> jules

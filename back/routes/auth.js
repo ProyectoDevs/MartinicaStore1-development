@@ -3,23 +3,35 @@ const { registroUsuario,
     loginUser, 
     logOut, 
     forgotPassword, 
+<<<<<<< HEAD
     resetPassword, 
     getUserProfile, 
+=======
+    resetPassword,
+    getUserProfile,
+>>>>>>> jules
     updatePassword,
     updateProfile,
     getAllUsers,
     getUserDetails,
     updateUser,
     deleteUser
+<<<<<<< HEAD
 
 
 } = require("../controllers/authController");
 const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 const router= express.Router();
+=======
+} = require("../controllers/authController");
+const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
+const router= require ("express").Router();
+>>>>>>> jules
 
 router.route('/usuario/registro').post(registroUsuario)
 router.route('/login').get(loginUser)
 router.route('/logout').get(isAuthenticatedUser, logOut)
+<<<<<<< HEAD
 router.route("/forgotPassword").post(forgotPassword)
 router.route('/resetPassword/:token').post(resetPassword)
 router.route('/yo').get(isAuthenticatedUser, getUserProfile)
@@ -31,5 +43,18 @@ router.route('/admin/allUsers').get(isAuthenticatedUser, authorizeRoles("admin")
 router.route('/admin/user/:id').get(isAuthenticatedUser, authorizeRoles("admin"), getUserDetails)
 router.route('/admin/updateUser/:id').put(isAuthenticatedUser, authorizeRoles("admin"), updateUser)
 router.route("/admin/deleteUser/:id").delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser)
+=======
+router.route('/forgotPassword').post(forgotPassword)
+router.route('/resetPassword/:token').post(resetPassword)
+router.route('/me').get(getUserProfile)
+router.route('/me/updatePassword').put(isAuthenticatedUser, updatePassword)
+router.route('/me/updateProfile').put(isAuthenticatedUser, updateProfile)
+
+//admin routes
+router.route('/admin/allUsers').get(isAuthenticatedUser, authorizeRoles("admin"),  getAllUsers)
+router.route('/admin/user/:id').get(isAuthenticatedUser, authorizeRoles("admin"), getUserDetails)
+router.route('/admin/updateUser/:id').put(isAuthenticatedUser, authorizeRoles("admin"), updateUser)
+router.route('/admin/deleteUser/:id').delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser)
+>>>>>>> jules
 
 module.exports= router

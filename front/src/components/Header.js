@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Fragment, useEffect, useState } from 'react'
 import "../App.css"
 import { Link } from "react-router-dom"
@@ -14,11 +15,21 @@ const Header = () => {
         .catch(error => console.log(error))
     })
 
+=======
+import React, { Fragment } from 'react'
+import "../App.css"
+import { Link } from "react-router-dom"
+import {Search} from './layout/Search'
+
+const Header = () => {
+
+>>>>>>> jules
     return (
         <Fragment>
             <nav className='navbar row'>
                 <div className='col-12 col-md-3'>
                     <div className='navbar-brand'>
+<<<<<<< HEAD
                         <Link to="/" ><img src="./images/logo.png" className="d-inline-block mx-3" alt="Martinica Store"></img></Link>
                     </div>  
                 </div>
@@ -37,6 +48,18 @@ const Header = () => {
                         </div>
                     </div>
                 </div>
+=======
+                        <Link to="/" ><img src="../images/NewlogoMS.jpeg" width="40%" alt="Martinica Store"></img></Link>
+                    </div>
+                </div>
+
+                <div className='col-12 col-md-4 mt-2 mt-md-0'>
+                {/*Aquí busca*/}
+                <Search />
+                </div>
+                {/*Boton inicio sesión*/}
+                <Link to="/login" className="btn ml-4' id="login_btn>Login</Link>
+>>>>>>> jules
                 <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
                     <div className="ml-4 dropdown d-inline">
                         <Link to="#!" className="btn dropdown-toggle text-white mr-4" type="button"
