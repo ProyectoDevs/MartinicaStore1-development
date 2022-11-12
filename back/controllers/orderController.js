@@ -93,7 +93,8 @@ exports.updateOrders= catchAsyncErrors(async(req, res, next) =>{
     await order.save()
 
     res.status(200).json({
-        success:true
+        success:true,
+        order
     })
 })
 
