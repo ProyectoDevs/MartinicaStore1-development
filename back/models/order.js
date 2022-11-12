@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const mongoose = require("mongoose")
 
 const orderSchema = mongoose.Schema({
@@ -18,32 +17,10 @@ const orderSchema = mongoose.Schema({
         departamento: {
             type: String,
             required: true
-=======
-const mongoose = require('mongoose')
-
-const orderSchema= mongoose.Schema({
-    envioInfo: {
-        direccion: {
-            type:String,
-            required:true
-        },
-        ciudad:{
-            type:String,
-            required:true
-        },
-        telefono:{
-            type:String,
-            required:true
-        },
-        departamento:{
-            type:String,
-            required:true
->>>>>>> jules
         }
     },
     user:
     {
-<<<<<<< HEAD
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "auth"
@@ -77,46 +54,10 @@ const orderSchema= mongoose.Schema({
             type: String
         },
         estado: {
-=======
-        type:mongoose.Schema.Types.ObjectId,
-        required:true,
-        ref:"auth"
-    },
-    items:[{
-        nombre:{
-            type:String,
-            required:true
-        },
-        cantidad:{
-            type:Number,
-            required:true
-        },
-        imagen:{
-            type:String,
-            required:true
-        },
-        precio:{
-            type:Number,
-            required:true
-        },
-        producto:{
-            type:mongoose.Schema.Types.ObjectId,
-            required:true,
-            ref:"productos"            
-        }
-    }
-    ],
-    pagoInfo:{
-        id:{
-            type:String
-        },
-        estado:{
->>>>>>> jules
             type:String
         }
     },
     fechaPago:{
-<<<<<<< HEAD
         type: Date
     },
     precioItems:{
@@ -133,24 +74,6 @@ const orderSchema= mongoose.Schema({
         type:Number,
         required: true,
         default: 0.0
-=======
-        type:Date,
-        },
-    precioItems:{
-        type:Number,
-        required:true,
-        default:0.0
-    },
-    precioImpuesto:{
-        type:Number,
-        required:true,
-        default:0.0
-    },
-    precioEnvio:{
-        type:Number,
-        required:true,
-        default:0.0
->>>>>>> jules
     },
     precioTotal:{
         type:Number,
@@ -158,13 +81,8 @@ const orderSchema= mongoose.Schema({
         default:0.0
     },
     estado:{
-<<<<<<< HEAD
         type: String,
         required: true,
-=======
-        type:String,
-        required:true,
->>>>>>> jules
         default:"Procesando"
     },
     fechaEnvio:{
@@ -172,16 +90,8 @@ const orderSchema= mongoose.Schema({
     },
     fechaCreacion:{
         type:Date,
-<<<<<<< HEAD
         default: Date.now
     }
 })
 
 module.exports=mongoose.model("order",orderSchema)
-=======
-        default:Date.now
-    }
-
-})
-module.exports = mongoose.model("order",orderSchema)
->>>>>>> jules
