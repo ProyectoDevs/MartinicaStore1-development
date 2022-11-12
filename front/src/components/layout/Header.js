@@ -43,9 +43,7 @@ const Header = () => {
                         </div>
                     </div>
                     <Link to="/carrito"><i class="fa fa-shopping-cart fa-2x text-white" aria-hidden="false"></i>
-                        {cantidad.map((c) => (
-                            <span className="ml-1" id="cart_count">{citemsCount}</span>
-                        ))}
+                        <span className="ml-1" id="cart_count">2</span>
                     </Link>
                 </div>
             </nav>

@@ -1,8 +1,18 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import "../App.css"
 import { Link } from "react-router-dom"
+import axios from 'axios';
+import { response } from 'express';
 
 const Header = () => {
+
+    const [cantidad,setCantidad] = useState(0);
+
+    useEffect(() =>{
+        axios.get('/api/countitems')
+        .then(response => setCantidad(response.data))
+        .catch(error => console.log(error))
+    })
 
     return (
         <Fragment>

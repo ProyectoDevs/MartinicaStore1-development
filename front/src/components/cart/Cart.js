@@ -6,8 +6,7 @@ import axios from 'axios'
 const Cart = () => {
 
     const [items, setItems] = useState([]);
-
-    const [cantidad, setCantidad] = useState(null);
+    const [cantidad, setCantidad] = useState(0);
 
     useEffect(() => {
         axios.get('/api/mycart')
@@ -45,6 +44,15 @@ const Cart = () => {
                                     <div className='col'>
                                         <p className='text-xs-left text-muted'><h6>Valor Total</h6></p>
                                         <p className='text-lg-left '>${(item.cantidad * item.producto[0].precio)}</p>
+                                    </div>
+
+                                    <div className='col'>
+                                        <p className='text-xs-left text-muted'><h6>Disponibles</h6></p>
+                                        <p className='text-lg-left '>{item.producto[0].inventario}</p>
+
+                                         {/* operacion para restar inventario */ }
+                                        <p className='text-xs-left text-muted'><h6>Saldo Inventario</h6></p>
+                                        <p className='text-lg-left'>{(item.producto[0].inventario - item.cantidad)}</p>
                                     </div>
                                 </div>
                             </div>
