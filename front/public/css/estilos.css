@@ -1,0 +1,45 @@
+    .navbar {
+        background-color: rgba(64, 84, 105, 0.55);
+        color: #ffff
+    }
+    
+    .navbar-brand {
+        color: #0d2343
+    }
+
+    .site-header {
+        background-color: #0d2343;
+    }
+
+    .App {
+        background-color: #e3e5ea;
+    }
+
+    
+.stars-gray {
+    position: relative;
+    display: inline-block;
+}
+
+.stars-yellow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+}
+
+.stars-gray::before {
+    content: "\\f005 \\f005 \\f005 \\f005 \\f005";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #ccc;
+}
+
+.stars-yellow::before {
+    content: "\\f005 \\f005 \\f005 \\f005 \\f005";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #f8ce0b;
+}

@@ -29,8 +29,8 @@ export const Search = () => {
         />
 
     <div class="input-group-append">
-        <button id="search_btn" class="btn">
-            <i class="fa fa-search" aria-hidden="true"></i>
+        <button id="search_btn" class="btn btn-light">
+            <i class="fa-solid fa-magnifying-glass"></i>
         </button>
     </div>
 </div>

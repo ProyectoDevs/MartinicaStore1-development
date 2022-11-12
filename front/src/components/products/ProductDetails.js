@@ -66,7 +66,7 @@ export const ProductDetails = () => {
 
                 {product.imagen && product.imagen.map(img => (
                   <Carousel.Item key={img.public_id}>
-                    <img className="d-block w-100" src={product.imagen[0].url} alt={product.nombre}></img>
+                    <img className="d-block w-100 mt-5" src={product.imagen[0].url} alt={product.nombre}></img>
                   </Carousel.Item>
                 ))}
               </Carousel>
