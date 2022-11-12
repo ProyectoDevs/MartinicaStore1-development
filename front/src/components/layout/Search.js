@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, {useState} from "react";
+import {useNavigate} from 'react-router-dom';
 
 export const Search = () => {
     const [keyword, setKeyword] = useState("")
     const navigate = useNavigate();
 
-    const searchHandler = (e) =>{
+    const searchHandler = (e) => {
         e.preventDefault();
 
         if(keyword.trim()){
@@ -15,27 +15,25 @@ export const Search = () => {
             navigate("/")
         }
     }
-    console.log(keyword)
-
-    return (
+  console.log(keyword)
+  return (
     <form onSubmit={searchHandler}>
     <div className="input-group">
-    <input
+      <input
         type="text"
         id="search_field"
         class="form-control"
-        placeholder='Que producto busca?...'
+        placeholder="Que producto busca?..."
         onChange={(e) => setKeyword(e.target.value)}
         />
-
-    <div class="input-group-append">
+      <div class="input-group-append">
         <button id="search_btn" class="btn">
-            <i class="fa fa-search" aria-hidden="true"></i>
+          <i class="fa fa-search" aria-hidden="true"></i>
         </button>
+      </div>
     </div>
-</div>
-</form >
+    </form>
   );
 };
 
-export default Search
+export default Search;
