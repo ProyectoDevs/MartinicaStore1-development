@@ -1,17 +1,20 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import "../App.css"
+import "../../App.css"
 import { Link } from "react-router-dom"
-import axios from 'axios';
-import { response } from 'express';
+import { Search } from './Search'
+import axios from 'axios'
 
 const Header = () => {
 
-    const [cantidad,setCantidad] = useState(0);
 
-    useEffect(() =>{
+    const [cantidad, setCantidad] = useState([]);
+
+    useEffect(() => {
         axios.get('/api/countitems')
-        .then(response => setCantidad(response.data))
-        .catch(error => console.log(error))
+            .then((response) => {
+                console.log(response.data);
+                setCantidad(response.data)
+            })
     })
 
     return (
@@ -19,23 +22,13 @@ const Header = () => {
             <nav className='navbar row'>
                 <div className='col-12 col-md-3'>
                     <div className='navbar-brand'>
-                        <Link to="/" ><img src="./images/logo.png" className="d-inline-block mx-3" alt="Martinica Store"></img></Link>
-                    </div>  
+                        <Link to="/" ><img src="../images/logo.png" alt="Martinica Store"></img></Link>
+                    </div>
                 </div>
 
                 <div className='col-12 col-md-6 mt-2 mt-md-0'>
-                    <div className="input-group">
-                        <input
-                            type="text"
-                            id="search_field"
-                            class="form-control"
-                            placeholder='Que producto busca?'></input>
-                        <div class="input-group-append">
-                            <button id="search-btn" class="btn">
-                                <i class="fa fa-search-plus fa-2x text-white" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
+                    {/*Aqui va buscar*/}
+                    <Search />
                 </div>
                 <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
                     <div className="ml-4 dropdown d-inline">
@@ -49,16 +42,12 @@ const Header = () => {
                             <Link className="dropdown-item" to="/">Cerrar Sesion</Link>
                         </div>
                     </div>
-
                     <Link to="/carrito"><i class="fa fa-shopping-cart fa-2x text-white" aria-hidden="false"></i>
-                        <span className="ml-1" id="cart_count">2</span></Link>
+                        <span className="ml-1" id="cart_count">2</span>
+                    </Link>
                 </div>
-
             </nav>
-
         </Fragment>
     )
-
 }
-
 export default Header
