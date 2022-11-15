@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect } from 'react'
 import { MDBDataTable } from 'mdbreact'
-
 import MetaData from '../layout/MetaData'
 import Sidebar from './Sidebar'
 import { useAlert } from 'react-alert'
@@ -9,7 +8,7 @@ import { getProducts } from '../../actions/productActions'
 import {Link } from "react-router-dom"
 
 export const ProductsList = () => {
-    const { loading, productos, error} = useSelector(state=> state.products)
+    const { products, error} = useSelector(state=> state.products)
     const alert= useAlert();
 
     const dispatch = useDispatch();
@@ -20,7 +19,6 @@ export const ProductsList = () => {
         dispatch(getProducts());
 
     }, [dispatch, alert, error]);
-
 
     const setProducts = () => {
         const data = {
@@ -52,8 +50,7 @@ export const ProductsList = () => {
             ],
             rows: []
         }
-
-        productos.forEach(product => {
+        products.forEach(product => {
             data.rows.push({
                 nombre: product.nombre,
                 precio: `$${product.precio}`,
@@ -85,20 +82,17 @@ export const ProductsList = () => {
                 <div className="col-12 col-md-2">
                     <Sidebar />
                 </div>
-
                 <div className="col-12 col-md-10">
                     <Fragment>
                         <h1 className="my-5">Productos Registrados</h1>
-
-                        {loading ? <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i> :(
-                            <MDBDataTable
+                        
+                        <MDBDataTable
                                 data={setProducts()}
                                 className="px-3"
                                 bordered
                                 striped
                                 hover
                             />
-                        )}
 
                     </Fragment>
                 </div>

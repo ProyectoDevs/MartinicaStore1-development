@@ -13,9 +13,7 @@ export const Home = () => {
   const keyword = params.keyword;
   const [precio, setPrecio] = useState([100, 1000000]);
   const [currentPage, setCurrentPage] = useState(1);
-  const { loading, products, error, resPerPage, productsCount } = useSelector(
-    (state) => state.products
-  );
+  const { loading, products, error, resPerPage, productsCount } = useSelector((state) => state.products);
   const alert = useAlert();
 
   const dispatch = useDispatch();
@@ -32,12 +30,10 @@ export const Home = () => {
 
   return (
     <Fragment>
-      {loading ? (
-        <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
-      ) : (
+      {loading ? <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i> : (
         <Fragment>
           <MetaData title="La mejor tienda virtual de ropa"></MetaData>
-          <h2 id="encabezado_productos"> Productos </h2>
+          <h1 id="encabezado_productos"> Productos </h1>
           <section id="productos" className="container mt-5">
             <div className="row">
               <Slider
@@ -50,32 +46,28 @@ export const Home = () => {
                 min={20000}
                 max={1000000}
                 defaultValue={[20000, 1000000]}
-                tipFormatter={(value) => `$${value}`}
+                tipFormatter={value => `$${value}`}
                 tipProps={{
                   placement: "top",
                   prefixCls: "rc-slider-tooltip",
                   visible: true,
                 }}
                 value={precio}
-                onChange={(precio) => setPrecio(precio)}
+                onChange={precio => setPrecio(precio)}
               ></Slider>
 
-              {products &&
-                products.map((producto) => (
-                  <div
-                    key={producto._id}
-                    className="col-sm-12 col-md-6 col-lg-3 my-3"
-                  >
+              {products && products.map((producto) => (
+                  <div key={producto._id}
+                    className="col-sm-12 col-md-6 col-lg-3 my-3">
                     <div className="card p-3 rounded">
                       <img
                         className="card-img-top mx-auto"
                         src={producto.imagen[0].url}
-                        alt={producto.imagen[0].public_id}
-                      ></img>
+                        alt={producto.imagen[0].public_id}>
+                        </img>
                       <div className="card-body d-flex flex-column">
                         <h5 id="titulo_producto">
                           <Link to={`/producto/${producto._id}`}>
-                            {" "}
                             {producto.nombre}
                           </Link>
                         </h5>
@@ -88,8 +80,7 @@ export const Home = () => {
                               }}
                             ></div>
                           </div>
-                          <span id="No_de_opniniones">
-                            {" "}
+                          <span id="No_de_opiniones">
                             {producto.numCalificaciones} Reviews{" "}
                           </span>
                         </div>

@@ -4,24 +4,30 @@ const catchAsyncErrors= require("../middleware/catchAsyncErrors");
 const tokenEnviado = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
-const { response } = require("express");
-const { json } = require("body-parser");
+const cloudinary= require("cloudinary");
 
 //Registrar un nuevo usuario /api/usuario/registro
 exports.registroUsuario= catchAsyncErrors(async (req, res, next) =>{
-    const {nombre, email, password}= req.body;
+    const {nombre, email, password} = req.body;
+
+    const result= await cloudinary.v2.uploader.upload(req.body.avatar, {
+        folder:"avatars",
+        width:240,
+        crop:"scale"
+    })
 
     const user = await User.create({
         nombre,
         email,
         password,
         avatar:{
-            public_id: "b25d4bb67c1ebd196af3",
-            url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKZwmqodcPdQUDRt6E5cPERZDWaqy6ITohlQ&usqp=CAU"
+            public_id:result.public_id,
+            url:result.secure_url
         }
     })
-    const token= user.getJwtToken();
+    tokenEnviado(user,201,res)
 })
+
 
 //Iniciar Sesión -Login
 exports.loginUser= catchAsyncErrors(async(req,res,next) => {
@@ -73,8 +79,8 @@ exports.forgotPassword = catchAsyncErrors(async (req,res,next) =>{
     
     await user.save({validateBeforeSave: false})
 
-    //Crear una url para hacer el reset de la contraseña
-    const resetUrl = `${req.protocol}://${req.get("host")}/api/resetPassword/${resetToken}`;
+    //Crear una url para reset de la contraseña
+    const resetUrl= `${req.protocol}://${req.get("host")}/resetPassword/${resetToken}`;
 
     const mensaje=`Hola \n\n Tu link para recuperar la contraseña es el siguiente: \n\n${resetUrl} \n\n
     Si no solicitaste este link, por favor comunícate con soporte. \n\n Att: \n Martinica Store`
@@ -100,9 +106,9 @@ exports.forgotPassword = catchAsyncErrors(async (req,res,next) =>{
 
 // Resetear la contraseña
 exports.resetPassword = catchAsyncErrors(async (req,res,next) =>{
-    //Hashear el token que llego con la URl
+    //Hashear el token que llegó con la URl
     const resetPasswordToken= crypto.createHash("sha256").update(req.params.token).digest("hex")
-    //Buscamos al usuario al que le vamos a resetear la contraseña
+    //Buscar usuario al que le vamos a resetear la contraseña
     const user= await User.findOne({
         resetPasswordToken,
         resetPasswordExpire:{$gt: Date.now()}
@@ -111,7 +117,7 @@ exports.resetPassword = catchAsyncErrors(async (req,res,next) =>{
     if(!user){
         return next(new ErrorHandler("El token es invalido o ya expiró",400))
     }
-    //Diligenciamos bien los campos?
+    //Diligenciar bien los campos?
     if(req.body.password!==req.body.confirmPassword){
         return next(new ErrorHandler("Contraseñas no coinciden",400))
     }
@@ -160,7 +166,23 @@ exports.updateProfile = catchAsyncErrors(async(req, res, next)=>{
         email: req.body.email
     }
 
-    //update Avatar
+    //updata Avatar: 
+    if (req.body.avatar !==""){
+        const user= await User.findById(req.user.id)
+        const image_id= user.avatar.public_id;
+        const res= await cloudinary.v2.uploader.destroy(image_id);
+
+        const result= await cloudinary.v2.uploader.upload(req.body.avatar, {
+            folder: "avatars",
+            width: 240,
+            crop: "scale"
+        })
+
+        newUserData.avatar={
+            public_id: result.public_id,
+            url: result.secure_url
+        }
+    }
 
     const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
         new:true,

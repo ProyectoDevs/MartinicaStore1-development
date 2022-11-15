@@ -26,19 +26,8 @@ exports.getProducts= catchAsyncErrors(async(req,res,next) => {
         filteredProductsCount,
         products
     })
-
-    
-    const productos = await producto.find();
-    if (!productos){
-        return next(new ErrorHandler("Información no encontrada", 404))
-        }
-    res.status(200).json({
-        success:true,
-        count: productos.length,
-        productos
-    })
 })
-
+    
 //Ver un producto por ID
 exports.getProductById= catchAsyncErrors(async(req,res,next) => {
     const product =  await producto.findById(req.params.id);
@@ -47,7 +36,7 @@ exports.getProductById= catchAsyncErrors(async(req,res,next) => {
         }
     res.status(200).json({
         success:true,
-        message: "Aquí debajo encuentras información sobre tu producto",
+        message: "Aquí encuentras información sobre tu producto",
         product
     })
 })
@@ -58,7 +47,7 @@ exports.updateProduct= catchAsyncErrors(async(req,res,next) => {
     if (!product){
         return next(new ErrorHandler("Producto no encontrado", 404))
     }
-    //Si el objeto si existía, emtonces si ejecuto la actualización
+    //Si el objeto sí existía, entonces sí ejecuto la actualización
     product=await producto.findByIdAndUpdate(req.params.id,req.body, {
         new:true, //Valido solo los atributos nuevos o actualizados
         runValidators: true
@@ -169,10 +158,9 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
         success: true,
         message: "review eliminada correctamente"
     })
-
 })
 
-//HABLEMOS DE FETCH
+//FETCH
 //Ver todos los productos
 function verProductos(){
     fetch('http://localhost:4000/api/productos')
@@ -181,7 +169,7 @@ function verProductos(){
     .catch(err=>console.log(err))
 }
 
-//verProductos();Llamos al método creado para probar la consulta
+//verProductos();Se llama al método creado para probar la consulta
 
 //Ver por ID
 function verProductoPorID(id) {

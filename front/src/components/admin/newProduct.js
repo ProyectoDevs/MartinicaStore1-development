@@ -2,9 +2,7 @@ import React, { Fragment } from 'react'
 import MetaData from '../layout/MetaData'
 import Sidebar from './Sidebar'
 
-
 const NewProduct = () => {
-
 
     return (
         <Fragment>
@@ -25,19 +23,14 @@ const NewProduct = () => {
                                     <input
                                         type="text"
                                         id="name_field"
-                                        className="form-control"
-                                
-                                    />
+                                        className="form-control"/>
                                 </div>
-
                                 <div className="form-group">
                                     <label htmlFor="price_field">Price</label>
                                     <input
                                         type="text"
                                         id="price_field"
-                                        className="form-control"
-                                        
-                                    />
+                                        className="form-control"/>
                                 </div>
 
                                 <div className="form-group">

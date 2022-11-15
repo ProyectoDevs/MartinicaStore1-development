@@ -1,4 +1,5 @@
-import { ALL_PRODUCTS_REQUEST, 
+import { 
+    ALL_PRODUCTS_REQUEST, 
     ALL_PRODUCTS_SUCCESS, 
     ALL_PRODUCTS_FAILURE,
     PRODUCT_DETAILS_REQUEST,
@@ -25,14 +26,14 @@ export const productsReducer = (state ={ products: []}, action)=>{
 
         case ALL_PRODUCTS_FAILURE:
             return{
-                loading:false,
+                loading: false,
                 error: action.payload
             }
 
         case CLEAR_ERRORS:
-            return{
+            return {
                 ...state,
-                error:null
+                error: null
             }
         
 
