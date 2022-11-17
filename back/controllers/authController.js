@@ -48,7 +48,7 @@ exports.loginUser= catchAsyncErrors(async(req,res,next) => {
     const contrasenaOK= await user.compararPass(password);
 
     if (!contrasenaOK) {
-        return next(new ErrorHandler("Contraseña inválida", 401))
+        return next(new ErrorHandler("Contraseña invalida", 401))
     }
     
     tokenEnviado(user,200,res)
@@ -136,8 +136,7 @@ exports.getUserProfile= catchAsyncErrors(async (req, res, next) =>{
     const user = await User.findById(req.user.id);
 
     res.status(200).json({
-        success: true,
-        user
+        success: true
     })
 })
 
