@@ -23,7 +23,7 @@ const Header = () => {
             <nav className='navbar row'>
                 <div className='col-12 col-md-3'>
                     <div className='navbar-brand'>
-                        <Link to="/" ><img src="../images/vetyshop.png" alt="Vety Shop Store Logo"></img></Link>
+                        <Link to="/" ><img src="../images/martinica.png" alt="Martinica Store" width={150}></img></Link>
                     </div>
                 </div>
 

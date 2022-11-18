@@ -37,6 +37,7 @@ export const ConfirmOrder = () => {
                 <div className="col-12 col-lg-8 mt-5 order-confirm">
 
                     <h4 className="mb-3">Información de Envio</h4>
+                    <p><b>Dirección:</b> {user && user.direccion}</p>
                     <p><b>Nombre:</b> {user && user.nombre}</p>
                     <p><b>Teléfono:</b> {shippingInfo.telefono}</p>
                     <p className="mb-4"><b>Dirección:</b> {`${shippingInfo.direccion}, ${shippingInfo.ciudad} ${shippingInfo.departamento}`}</p>

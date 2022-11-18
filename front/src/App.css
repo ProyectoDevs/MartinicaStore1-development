@@ -27,19 +27,19 @@ body {
 }
 
 nav {
-  background-color: #232f3e;
+  background-color: #609f81;
   padding: 1rem 1rem;
 }
 
 #search_btn {
-  background-color: #febd69;
+  background-color: #a0835f;
 }
 
 .input-group {
   width: 90%;
   margin-right: 35%;
 }
-f
+
 #search_field {
   height: 2.4rem;
   padding: 1rem;
@@ -116,7 +116,7 @@ f
 /* Footer */
 footer {
   margin-top: 8rem;
-  color: grey;
+  color: rgb(149, 121, 121);
   bottom: 0;
   width: 100%;
 }
@@ -282,7 +282,7 @@ footer {
 
 .stockCounter input::-webkit-outer-spin-button,
 .stockCounter input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+  /*-webkit-appearance: none;*/
   margin: 0;
 }
 
@@ -613,4 +613,7 @@ ul.CTAs a {
 .review_user {
   font-size: 0.8rem;
   color: grey;
+}
+.imagen_producto{
+  padding: 5%;
 }
