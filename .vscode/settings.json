@@ -1,0 +1,5 @@
+{
+  "appService.zipIgnorePattern": ["node_modules{,/**}", ".vscode{,/**}"],
+  "appService.defaultWebAppToDeploy": "/subscriptions/211e17ee-f7b3-4909-a3c6-4f2c020ffe5f/AppServices/subscriptions/211e17ee-f7b3-4909-a3c6-4f2c020ffe5f/resourceGroups/nodeproject/providers/Microsoft.Web/sites/Martinica",
+  "appService.deploySubpath": "back"
+}
