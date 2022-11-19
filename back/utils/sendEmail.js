@@ -10,7 +10,7 @@ const sendEmail = async options =>{
         }
       });
     const mensaje={
-        from: "VetyShop Store <ozzyta@outlook.com>",
+        from: "Martinica Store <luisgalic64@gmail.com>",
         to: options.email,
         subject: options.subject,
         text: options.mensaje

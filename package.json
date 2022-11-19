@@ -1,5 +1,5 @@
 {
-  "name": "vetyshop",
+  "name": "martinica store",
   "version": "1.0.0",
   "description": "Tienda virtual de productos para mascotas",
   "main": "server.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OZZYTA/VetyShop.git"
+    "url": ""
   },
-  "author": "Natali Velasquez",
+  "author": "Devs",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/OZZYTA/VetyShop/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/OZZYTA/VetyShop#readme",
+  "homepage": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.1",
